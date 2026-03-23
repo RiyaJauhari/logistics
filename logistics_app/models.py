@@ -69,49 +69,18 @@ class Shipment(models.Model):
     def __str__(self):
         return self.shipmentId
 
-class Driver(models.Model):
-    
-    driverId = models.CharField(
-        max_length=64, unique=True, blank=False, null=False,primary_key=True)
-    firstName = models.CharField(max_length=100, null=True, blank=True)
-    liscenseNumber = models.CharField(max_length=100, null=True, blank=True)
-    middleName = models.CharField(max_length=100, null=True, blank=True)
-    lastName = models.CharField(max_length=100, null=True, blank=True)
-    email = models.EmailField(null=True, blank=True)
-    phone = models.CharField(max_length=100, null=True, blank=True)
-    address = models.CharField(max_length=300, null=True, blank=True)
-    city = models.CharField(max_length=100, null=True, blank=True)
-    state = models.CharField(max_length=100, null=True, blank=True)
-    zipCode = models.CharField(max_length=100, null=True, blank=True)
-    country = models.CharField(max_length=100, null=True, blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    class Meta:
-        db_table = 'driver'
-
-    def __str__(self):
-        return self.driverId
-    
-class Vechile(models.Model):
-    
-    vehicleId = models.CharField(
-        max_length=64, unique=True, blank=False, null=False,primary_key=True)
-    vehicle = models.CharField(max_length=100, null=True, blank=True)
-    vehicleType=models.CharField(max_length=100, null=True, blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    class Meta:
-        db_table = 'driver'
-
-    def __str__(self):
-        return self.vehicleId
-
 class Transport(models.Model):
     transportId=models.CharField(
         max_length=64, unique=True, blank=False, null=False,primary_key=True)
-    vehicle=models.ForeignKey(Vechile,on_delete=models.CASCADE)
+    vehicle=models.CharField(
+        max_length=64,  blank=False, null=False)
     order=models.ForeignKey(Order,on_delete=models.CASCADE)
-    driver=models.ForeignKey(Driver,on_delete=models.CASCADE)
+    driver=models.CharField(
+        max_length=64,  blank=False, null=False)
+    vehicleNumber=models.CharField(
+        max_length=64,  blank=False, null=False)
+    vehicleOwner=models.CharField(
+        max_length=64,  blank=False, null=False)
     
     class Meta:
         db_table = 'transport'
